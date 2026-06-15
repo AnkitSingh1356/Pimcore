@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer Listing{% endblock %}
+
+{% block body %}
+
+<h1 class="page-title">Customers</h1>
+
+<div class="cl-layout">
+
+        <main class="cl-main">
+        <div class="cl-card">
+
+            <a href="{{ path('customer_create') }}" class="btn btn-success" style="margin-bottom:20px">
+                Add Customer
+            </a>
+
+            <div class="table-scroll">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width:55px">ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th style="width:90px">Status</th>
+                    <th style="width:80px">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.firstName }}</td>
+                    <td>{{ customer.lastName }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td><span class="badge">{{ customer.status }}</span></td>
+                    <td>
+                        <a href="{{ path('customer_detail', {id: customer.id}) }}"
+                           class="btn btn-primary">View</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" style="text-align:center;color:#6b7280;padding:32px 0">
+                        No customers found.
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+
+                        {% if pagination is defined %}
+            <nav class="pg-wrap" aria-label="Customer pages">
+                                {% if pagination.has_prev %}
+                    <a class="pg-item pg-arrow"
+                       href="{{ path('customer_list', {page: pagination.prev_page, limit: pagination.limit}) }}">&laquo;</a>
+                {% else %}
+                    <span class="pg-item pg-arrow pg-disabled">&laquo;</span>
+                {% endif %}
+
+                                {% for p in pagination.range %}
+                    {% if p is null %}
+                        <span class="pg-item pg-ellipsis">&hellip;</span>
+                    {% elseif p == pagination.page %}
+                        <span class="pg-item pg-current">{{ p }}</span>
+                    {% else %}
+                        <a class="pg-item"
+                           href="{{ path('customer_list', {page: p, limit: pagination.limit}) }}">{{ p }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                                {% if pagination.has_next %}
+                    <a class="pg-item pg-arrow"
+                       href="{{ path('customer_list', {page: pagination.next_page, limit: pagination.limit}) }}">&raquo;</a>
+                {% else %}
+                    <span class="pg-item pg-arrow pg-disabled">&raquo;</span>
+                {% endif %}
+
+                <span class="pg-meta">
+                    {{ pagination.total }} customer{{ pagination.total != 1 ? 's' : '' }}
+                    &mdash; Page {{ pagination.page }} of {{ pagination.pages }}
+                </span>
+
+                <span class="pg-per-page">
+                    <label for="pg-limit">Per page:</label>
+                    <select id="pg-limit"
+                            onchange="window.location.href=this.value">
+                        {% for opt in [5, 10, 20, 50] %}
+                        <option value="{{ path('customer_list', {page: 1, limit: opt}) }}"
+                                {{ pagination.limit == opt ? 'selected' : '' }}>{{ opt }}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+            </nav>
+            {% endif %}
+
+        </div>    </main>
+
+        <aside class="cl-sidebar">
+        <div class="cl-card">
+
+            <h2 class="import-hdg">Import Customers (CSV)</h2>
+
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="customer_csv">CSV file</label>
+                    <input type="file"
+                           name="customer_csv"
+                           id="customer_csv"
+                           accept=".csv"
+                           class="file-input"
+                           required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Import</button>
+            </form>
+
+                        {% if import_result is defined and import_result %}
+            <div class="import-summary">
+
+                                {% if import_result.status == 'NO_CHANGE' %}
+                    <div class="import-no-change">
+                        <span class="import-no-change-icon">&#10003;</span>
+                        <span>No data changed &mdash; this file has already been imported.</span>
+                    </div>
+                {% else %}
+
+                <h3 class="import-summary-hdg">Import Summary</h3>
+
+                <div class="ism-grid">
+                    <div class="ism-cell ism-total">
+                        <div class="ism-val">{{ import_result.total_records }}</div>
+                        <div class="ism-lbl">Total</div>
+                    </div>
+                    <div class="ism-cell ism-success">
+                        <div class="ism-val">{{ import_result.successful_records }}</div>
+                        <div class="ism-lbl">Success</div>
+                    </div>
+                    <div class="ism-cell ism-failed">
+                        <div class="ism-val">{{ import_result.failed_records }}</div>
+                        <div class="ism-lbl">Failed</div>
+                    </div>
+                </div>
+
+                {% if import_result.header_errors is defined and import_result.header_errors|length > 0 %}
+                <div class="import-errs">
+                    <strong>Header errors:</strong>
+                    <ul style="margin:6px 0 0 16px;font-size:12px">
+                        {% for err in import_result.header_errors %}
+                            <li>{{ err }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                {% if import_result.file_errors is defined and import_result.file_errors|length > 0 %}
+                <div class="import-errs">
+                    <strong>File errors:</strong>
+                    <ul style="margin:6px 0 0 16px;font-size:12px">
+                        {% for err in import_result.file_errors %}
+                            <li>{{ err }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                {% if import_result.errors is defined and import_result.errors|length > 0 %}
+                <div class="import-row-errs">
+                    <strong style="font-size:13px">Row errors ({{ import_result.errors|length }}):</strong>
+                    <div class="import-err-scroll">
+                        <table class="import-err-tbl">
+                            <thead>
+                            <tr>
+                                <th>Row</th>
+                                <th>Field</th>
+                                <th>Error</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for e in import_result.errors %}
+                            <tr>
+                                <td class="err-row">{{ e.rowNumber }}</td>
+                                <td class="err-field">{{ e.fieldName }}</td>
+                                <td class="err-msg">{{ e.errorMessage }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% endif %}
+            </div>            {% endif %}
+
+        </div>    </aside>
+
+</div>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="page-title">
+    Customer Detail
+</h1>
+
+<div class="card" id="customer-detail" data-customer-id="{{ customerId }}">
+
+    <div id="customer-loading">Loading...</div>
+
+    <div id="customer-content" style="display:none;">
+
+        <div class="detail-row">
+            <strong>First Name:</strong>
+            <span id="customer-firstName"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Last Name:</strong>
+            <span id="customer-lastName"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Email:</strong>
+            <span id="customer-email"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Phone:</strong>
+            <span id="customer-phone"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Date Of Birth:</strong>
+            <span id="customer-dateOfBirth"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Gender:</strong>
+            <span id="customer-gender"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Address:</strong>
+            <span id="customer-address"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Status:</strong>
+            <span id="customer-status"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>City:</strong>
+            <span id="customer-city"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Country:</strong>
+            <span id="customer-country"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Channel:</strong>
+            <span id="customer-channel"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Customer Type:</strong>
+            <span id="customer-customerType"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Preferred Sport:</strong>
+            <span id="customer-preferredSport"></span>
+        </div>
+
+        <div class="detail-row">
+            <strong>Newsletter Opt-in:</strong>
+            <span id="customer-newsletterOptin"></span>
+        </div>
+
+    </div>
+
+    <div id="customer-error" style="display:none;color:red;">
+        Failed to load customer details.
+    </div>
+
+    <br>
+
+    <div class="action-buttons">
+        <a href="{{ path('customer_edit', {id: customerId}) }}"
+           class="btn btn-warning">
+            Edit Customer
+        </a>
+
+        <a href="{{ path('customer_list') }}"
+           class="btn btn-primary">
+            Back
+        </a>
+
+        <a href="{{ path('customer_delete', {id: customerId}) }}"
+           class="btn btn-danger"
+           onclick="return confirm('Are you sure you want to delete this customer?');">
+            Delete
+        </a>
+    </div>
+
+</div>
+
+<script>
+(function () {
+    var customerId = document.getElementById('customer-detail').dataset.customerId;
+
+    fetch('/api/customers/' + customerId)
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error('Request failed');
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            document.getElementById('customer-firstName').textContent        = data.firstName        || '';
+            document.getElementById('customer-lastName').textContent         = data.lastName         || '';
+            document.getElementById('customer-email').textContent            = data.email            || '';
+            document.getElementById('customer-phone').textContent            = data.phone            || '';
+            document.getElementById('customer-dateOfBirth').textContent      = data.dateOfBirth      || '';
+            document.getElementById('customer-gender').textContent           = data.gender           || '';
+            document.getElementById('customer-address').textContent          = data.address          || '';
+            document.getElementById('customer-status').textContent           = data.status           || '';
+            document.getElementById('customer-city').textContent             = data.city             || '';
+            document.getElementById('customer-country').textContent          = data.country          || '';
+            document.getElementById('customer-channel').textContent          = data.channel          || '';
+            document.getElementById('customer-customerType').textContent     = data.customerType     || '';
+            document.getElementById('customer-preferredSport').textContent   = data.preferredSport   || '';
+            document.getElementById('customer-newsletterOptin').textContent  = data.newsletterOptin ? 'Yes' : 'No';
+
+            document.getElementById('customer-loading').style.display = 'none';
+            document.getElementById('customer-content').style.display = 'block';
+        })
+        .catch(function () {
+            document.getElementById('customer-loading').style.display = 'none';
+            document.getElementById('customer-error').style.display   = 'block';
+        });
+}());
+</script>
+
+{% endblock %}

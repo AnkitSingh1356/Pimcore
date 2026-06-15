@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<h1 class="page-title">
+    Edit Customer
+</h1>
+
+<div class="card">
+
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.firstName) }}
+        {{ form_widget(form.firstName, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.lastName) }}
+        {{ form_widget(form.lastName, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.phone) }}
+        {{ form_widget(form.phone, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.dateOfBirth) }}
+        {{ form_widget(form.dateOfBirth, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.gender) }}
+        {{ form_widget(form.gender, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.address) }}
+        {{ form_widget(form.address, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.status) }}
+        {{ form_widget(form.status, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.city) }}
+        {{ form_widget(form.city, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.country) }}
+        {{ form_widget(form.country, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.channel) }}
+        {{ form_widget(form.channel, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.customerType) }}
+        {{ form_widget(form.customerType, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.preferredSport) }}
+        {{ form_widget(form.preferredSport, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.newsletterOptin) }}
+        {{ form_label(form.newsletterOptin) }}
+    </div>
+
+    <button type="submit" class="btn btn-success">
+    Update Customer
+</button>
+
+    {{ form_end(form) }}
+
+</div>
+
+{% endblock %}

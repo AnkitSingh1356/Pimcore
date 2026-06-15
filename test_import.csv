@@ -1,0 +1,8 @@
+first_name,last_name,email,phone,city,country,channel,customer_type,preferred_sport,newsletter_optin
+Jon,Snow,jon.snow+got1@example.org,+919811111111,Winterfell,Westeros,web,individual,"Football,Cricket",yes
+Daenerys,Targaryen,daenerys+got2@example.org,+919822222222,Dragonstone,Westeros,mobile,vip,Tennis,no
+Tyrion,Lannister,tyrion+got3@example.org,+919833333333,KingsLanding,Westeros,retail,business,"Swimming,Yoga,Running",yes
+Arya,Stark,arya+got4@example.org,+919844444444,Winterfell,Westeros,partner,individual,"Badminton,Volleyball",no
+Jaime,Lannister,jaime+got5@example.org,+919855555555,CasterlyRock,Westeros,web,business,"Running,Cycling,Fitness",yes
+Sansa,Stark,,+919866666666,Winterfell,Westeros,web,individual,Football,yes
+Cersei,Lannister,cersei+got6@example.org,+919877777777,KingsLanding,Westeros,mobile,vip,INVALID_SPORT,no

@@ -1,0 +1,11 @@
+first_name,last_name,email,phone,date_of_birth,gender,address,status,city,country,channel,customer_type,preferred_sport,newsletter_optin
+John,Doe,john.doe@example.com,+1-555-0101,1985-03-15,male,"123 Main Street, Apt 4B",active,New York,USA,web,individual,running,1
+Jane,Smith,jane.smith@example.com,+1-555-0102,1990-07-22,female,"456 Oak Avenue",active,Los Angeles,USA,mobile,vip,yoga,1
+Carlos,García,carlos.garcia@example.com,+34-91-555-0103,1978-11-30,male,"Calle Mayor 78",active,Madrid,Spain,retail,business,football,0
+Aisha,Patel,aisha.patel@example.com,+44-20-555-0104,1995-01-08,female,"22 Baker Street",active,London,UK,web,individual,"tennis,boxing",1
+Wei,Zhang,wei.zhang@example.com,+86-10-555-0105,1988-05-19,male,"Building 5 Huayuan Road",inactive,Beijing,China,wholesale,business,badminton,0
+Maria,Rossi,maria.rossi@example.com,+39-02-555-0106,1992-09-03,female,"Via Roma 12",active,Rome,Italy,partner,vip,cycling,1
+Ahmed,Al-Rashid,ahmed.rashid@example.com,+971-4-555-0107,1983-12-25,male,"Al Wasl Road",active,Dubai,UAE,retail,business,golf,0
+Sophie,Dubois,sophie.dubois@example.com,+33-1-555-0108,1997-04-14,female,"15 Rue de la Paix",active,Paris,France,web,individual,swimming,1
+Lucas,Santos,lucas.santos@example.com,+55-11-555-0109,1980-08-07,male,"Av. Paulista 1000",active,São Paulo,Brazil,mobile,individual,football,1
+Emma,Johnson,emma.johnson@example.com,+1-555-0110,1993-02-28,female,"789 Pine Road",active,Chicago,USA,web,individual,"fitness,yoga",1

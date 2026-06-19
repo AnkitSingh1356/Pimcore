@@ -1,7 +1,7 @@
 # Pimcore Project Skeleton 
 
 This skeleton should be used by experienced Pimcore developers for starting a new project from the ground up. 
-If you are new to Pimcore, it's better to start with our demo package, listed below 😉
+If you are new to Pimcore, it's better to start with our demo package, listed below 
 
 ## Getting started
 ```bash
@@ -13,7 +13,7 @@ cd ./my-project
 - Point your virtual host to `my-project/public`
 - [Only for Apache] Create `my-project/public/.htaccess` according to https://pimcore.com/docs/platform/Pimcore/Installation_and_Upgrade/System_Setup_and_Hosting/Apache_Configuration/ 
 - Open https://your-host/admin in your browser
-- Done! 😎
+- Done! 
 
 ## Docker
 
